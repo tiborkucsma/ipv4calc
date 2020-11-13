@@ -1,7 +1,7 @@
 require "_premake/clean"
 require "_premake/gmake2-build"
 
-workspace "ipv4-calc"
+workspace "ipv4calc"
     location "generated"
     language "C"
     architecture "x86_64"
@@ -18,6 +18,6 @@ workspace "ipv4-calc"
     targetdir ("build/bin/%{prj.name}/%{cfg.longname}")
     objdir ("build/obj/%{prj.name}/%{cfg.longname}")
 
-project "ipv4-clalc"
+project "ipv4calc"
     kind "ConsoleApp"
     files { "src/**", "include/**" }
