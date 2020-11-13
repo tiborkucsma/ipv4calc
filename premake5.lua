@@ -21,3 +21,4 @@ workspace "ipv4calc"
 project "ipv4calc"
     kind "ConsoleApp"
     files { "src/**", "include/**" }
+    includedirs "include"
