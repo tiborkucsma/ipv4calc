@@ -9,7 +9,7 @@ $ ./linux-gen-gmake.sh
 $ cd generated
 $ make
 $ cd ..
-$ ./ipv4calc -h # Ez kiírja a program help menüjét, amelyben a használatához szükséges minden infó megtalálható
+$ ipv4calc -h # Ez kiírja a program help menüjét, amelyben a használatához szükséges minden infó megtalálható
 ```
 ## Windows
 Egyelőre nem támogatott.
