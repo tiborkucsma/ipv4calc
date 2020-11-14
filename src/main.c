@@ -8,6 +8,17 @@
 #include "ip4io.h"
 #include "ip4math.h"
 
+#define USAGE_STR \
+    "Hasznalat: %s [OPCIOK]\n" \
+    "Muveletek cimekkel:\n" \
+    " -a       IPv4 cim megadasa\n" \
+    " [-c]     IPv4 cim osztalyanak kiirasa\n" \
+    " [-d]     IPv4 cim alapertelmezett maszkjanak kiirasa\n" \
+    " [-s <n>] IPv4 cim felbontasa n alhalozatra es az alhalok kiirasa\n" \
+    "Muveletek maszkokkal:\n" \
+    " -m       IPv4 maszk megadasa\n" \
+    " [-w]     IPv4 maszk atalakitasa wildcardra\n"
+
 int main(int argc, char *argv[])
 {
     int   setopts[128] = {};
@@ -19,9 +30,27 @@ int main(int argc, char *argv[])
         setoptargs[ret] = optarg;
     }
 
-    if (setopts['h'] || ret == '?')
+    if (setopts['h'])
     {
-        printf("Usage:\n");
+        printf(USAGE_STR, argv[0]);
+        return 0;
+    }
+    if (ret == '?')
+    {
+        printf(USAGE_STR, argv[0]);
+        return 1;
+    }
+    if (argc == 1)
+    {
+        printf("Argumentumok megadasa kotelezo!\n\n");
+        printf(USAGE_STR, argv[0]);
+        return 1;
+    }
+    if (!setopts['a'] && !setopts['m'])
+    {
+        printf("Cim vagy maszk megadasa kotelezo!\n\n");
+        printf(USAGE_STR, argv[0]);
+        return 1;
     }
     
     if (setopts['a'])
