@@ -1,37 +1,88 @@
 #include <stdio.h>
 #include <inttypes.h>
+#include <unistd.h>
+#include <ctype.h>
 
 #include "ip4utils.h"
 #include "ip4types.h"
 #include "ip4io.h"
 #include "ip4math.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    ipv4_addr_t in_addr = scan_ipv4_addr();
-    uint32_t n_subnets;
-    scanf("%u", &n_subnets);
-
-    uint32_t n_bits_to_convert = bits_to_convert(n_subnets);
-    printf("%u alhalozatra kell bontani (%u bit atalakitasaval).\n", pow_u32(2, n_bits_to_convert), n_bits_to_convert);
-
-    ipv4_class_t in_addr_class = ipv4_addr_class(in_addr);
-    printf("A cim osztalya: ");
-    print_ipv4_class_name(in_addr_class);
-    putchar('\n');
-
-    uint8_t subn_addr_mask_bits = ipv4_class_default_mask_bits(in_addr_class) + n_bits_to_convert;
-    if (subn_addr_mask_bits > 30)
+    int   setopts[128] = {};
+    char *setoptargs[128] = {};
+    int ret;
+    while (isalnum(ret = getopt(argc, argv, "a:cds:m:wbh")))
     {
-        printf("Hibas adatok! A legnagyobb ervenyes maszk /30-as, a megadott /%d!\n", subn_addr_mask_bits);
-        return 1;
+        setopts[ret] = 1;
+        setoptargs[ret] = optarg;
     }
-    ipv4_mask_t subn_addr_mask = ipv4_mask_generate(subn_addr_mask_bits);
-    printf("Az uj maszk:      ");
-    print_ipv4_mask_dec(subn_addr_mask);
-    putchar('\n');
 
-    print_subnets(in_addr, subn_addr_mask, n_subnets);
+    if (setopts['h'] || ret == '?')
+    {
+        printf("Usage:\n");
+    }
+    
+    if (setopts['a'])
+    {
+        ipv4_addr_t in_addr = scan_ipv4_addr_str(setoptargs['a']);
+
+        printf("A cim: "); PRINT_IPV4_ADDR(in_addr, setopts['b']) putchar('\n');
+
+        ipv4_class_t in_addr_class = ipv4_addr_class(in_addr);
+        if (setopts['c'])
+        {
+            printf("A cim osztalya: ");
+            print_ipv4_class_name(in_addr_class);
+            putchar('\n');
+        }
+
+        if (setopts['d'])
+        {
+            ipv4_mask_t in_addr_mask = ipv4_mask_generate(ipv4_class_default_mask_bits(in_addr_class));
+            printf("A cim alapertelmezett maszkja: ");
+
+            PRINT_IPV4_MASK(in_addr_mask, setopts['b'])
+
+            putchar('\n');
+        }
+
+        if (setopts['s'])
+        {
+            uint32_t n_subnets;
+            sscanf(setoptargs['s'], "%u", &n_subnets);
+
+            uint32_t n_bits_to_convert = bits_to_convert(n_subnets);
+
+            uint8_t subn_addr_mask_bits = ipv4_class_default_mask_bits(in_addr_class) + n_bits_to_convert;
+            if (subn_addr_mask_bits > 30)
+            {
+                printf("Hibas adatok! A legnagyobb ervenyes maszk /30-as, a megadott /%d!\n", subn_addr_mask_bits);
+                return 1;
+            }
+
+            printf("%u alhalozatra kell bontani (%u bit atalakitasaval).\n", pow_u32(2, n_bits_to_convert), n_bits_to_convert);
+            
+            ipv4_mask_t subn_addr_mask = ipv4_mask_generate(subn_addr_mask_bits);
+            printf("Az uj maszk: ");
+            PRINT_IPV4_MASK(subn_addr_mask, setopts['b'])
+            putchar('\n');
+            putchar('\n');
+
+            print_subnets(in_addr, subn_addr_mask, n_subnets, setopts['b']);
+        }
+    } else if (setopts['m'])
+    {
+        ipv4_mask_t in_mask = scan_ipv4_mask_str(setoptargs['m']);
+
+        printf("A maszk:  "); PRINT_IPV4_MASK(in_mask, setopts['b']) putchar('\n');
+
+        if (setopts['w'])
+        {
+            printf("Wildcard: "); PRINT_IPV4_MASK(~in_mask, setopts['b']) putchar('\n');
+        }
+    }
     
     return 0;
 }

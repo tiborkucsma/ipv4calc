@@ -21,6 +21,9 @@ uint8_t      ipv4_addr_octet(ipv4_addr_t addr, uint8_t n);
  */
 uint8_t      ipv4_mask_octet(ipv4_mask_t mask, uint8_t n);
 
+
+
+
 /**
  * @brief Meghatarozza egy ip cim osztalyat
  * 
@@ -29,12 +32,18 @@ uint8_t      ipv4_mask_octet(ipv4_mask_t mask, uint8_t n);
  */
 ipv4_class_t ipv4_addr_class(ipv4_addr_t addr);
 
+
+
+
 /**
  * @brief Meghatarozza az egyes bitek szamat egy osztaly alapertelmezett maszkjaban
  * 
  * @return Egyes bitek szama
  */
 uint8_t     ipv4_class_default_mask_bits(ipv4_class_t class);
+
+
+
 
 /**
  * @brief General egy maszkot n darab egyes bittel
