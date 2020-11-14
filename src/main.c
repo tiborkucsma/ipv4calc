@@ -10,14 +10,20 @@
 
 #define USAGE_STR \
     "Hasznalat: %s [OPCIOK]\n" \
-    "Muveletek cimekkel:\n" \
+    "\n" \
+    "Muveletek csak cimekkel:\n" \
     " -a       IPv4 cim megadasa\n" \
     " [-c]     IPv4 cim osztalyanak kiirasa\n" \
     " [-d]     IPv4 cim alapertelmezett maszkjanak kiirasa\n" \
     " [-s <n>] IPv4 cim felbontasa n alhalozatra es az alhalok kiirasa\n" \
-    "Muveletek maszkokkal:\n" \
+    "\n" \
+    "Muveletek csak maszkokkal:\n" \
     " -m       IPv4 maszk megadasa\n" \
-    " [-w]     IPv4 maszk atalakitasa wildcardra\n"
+    " [-w]     IPv4 maszk atalakitasa wildcardra\n" \
+    "\n" \
+    "Muveletek cimekkel és maszkokkal: A megadott maszk alapjan mi a cim (alhalozati cim, host cim, szorasi cim)\n" \
+    " -a       IPv4 cim megadasa\n" \
+    " -m       IPv4 maszk megadasa\n"
 
 int main(int argc, char *argv[])
 {
@@ -53,7 +59,30 @@ int main(int argc, char *argv[])
         return 1;
     }
     
-    if (setopts['a'])
+    if (setopts['a'] && setopts['m'])
+    {
+        ipv4_addr_t in_addr = scan_ipv4_addr_str(setoptargs['a']);
+        ipv4_mask_t in_mask = scan_ipv4_mask_str(setoptargs['m']);
+
+        printf("A cim:   "); PRINT_IPV4_ADDR(in_addr, setopts['b']) putchar('\n');
+        printf("A maszk: "); PRINT_IPV4_MASK(in_mask, setopts['b']) putchar('\n');
+        
+        if ((in_addr & in_mask) == in_addr)
+        {
+            printf("A megadott maszk alapjan ez a cim egy alhalozat cime.\n");
+        } else if ((in_addr | ~in_mask) == in_addr)
+        {
+            printf("A megadott maszk alapjan ez a cim egy alhalozat szorasi cime.\nAz alhalozat cime: ");
+            PRINT_IPV4_ADDR(in_addr & in_mask, setopts['b'])
+            putchar('\n');
+        } else
+        {
+            printf("A megadott maszk alapjan ez a cim egy host cime.\nAz alhalozat cime: ");
+            PRINT_IPV4_ADDR(in_addr & in_mask, setopts['b'])
+            putchar('\n');
+        }
+
+    } else if (setopts['a'])
     {
         ipv4_addr_t in_addr = scan_ipv4_addr_str(setoptargs['a']);
 
