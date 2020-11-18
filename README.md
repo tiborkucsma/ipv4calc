@@ -9,4 +9,8 @@ $ ./linux-build-gmake.sh
 $ ipv4calc help # Ez kiírja a program help menüjét, amelyben a használatához szükséges minden infó megtalálható
 ```
 ### Windows
-Egyelőre nem támogatott.
+#### Visual Studio 2019
+Az egyetlen szükséges lépés a `windows-build-vs2019.bat` batch szkript futtatása. Ez után a futtatható állomány létrejön, és a `build/bin/ipv4calc/Debug` mappában lesz elérhető. Ebben a mappában nyissunk egy terminált, és használjuk a programot a következő képpen:
+```sh
+$ ipv4calc help # Ez kiírja a program help menüjét, amelyben a használatához szükséges minden infó megtalálható
+```
