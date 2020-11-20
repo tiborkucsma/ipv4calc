@@ -2,18 +2,6 @@
 
 #include <inttypes.h>
 
-/*typedef union
-{
-    uint32_t addr;
-    uint8_t  oct[4];
-} ipv4_addr_t;
-
-typedef union
-{
-    uint32_t mask;
-    uint8_t  oct[4];
-} ipv4_mask_t;*/
-
 typedef uint32_t ipv4_addr_t;
 
 typedef uint32_t ipv4_mask_t;

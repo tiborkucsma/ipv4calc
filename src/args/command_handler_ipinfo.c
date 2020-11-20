@@ -1,12 +1,12 @@
-#include "args/command_handler_ipinfo.h"
+#include "command_handlers.h"
 
 #include <stdio.h>
 
-#include "ip4utils.h"
-#include "ip4types.h"
-#include "ip4io.h"
-#include "ip4math.h"
-#include "args/process_args.h"
+#include "ipv4utils.h"
+#include "ipv4types.h"
+#include "ipv4io.h"
+#include "ipv4math.h"
+#include "process_args.h"
 
 int command_handler_ipinfo(arg_data_t *pad)
 {

@@ -1,4 +1,4 @@
-#include "args/process_args.h"
+#include "process_args.h"
 
 #include <string.h>
 #include <stdlib.h>

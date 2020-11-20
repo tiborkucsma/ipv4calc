@@ -4,16 +4,13 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#include "ip4utils.h"
-#include "ip4types.h"
-#include "ip4io.h"
-#include "ip4math.h"
-#include "args/process_args.h"
+#include "ipv4utils.h"
+#include "ipv4types.h"
+#include "ipv4io.h"
+#include "ipv4math.h"
+#include "process_args.h"
 
-#include "args/command_handler_subnet.h"
-#include "args/command_handler_wildcard.h"
-#include "args/command_handler_ipinfo.h"
-#include "args/command_handler_help.h"
+#include "command_handlers.h"
 typedef struct { int args; int (*handler)(arg_data_t *pad); const char name[128]; } command_data_t;
 const command_data_t command_data[] = {
     { 2, &command_handler_subnet,   "subnet" },

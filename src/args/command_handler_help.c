@@ -1,4 +1,4 @@
-#include "args/command_handler_help.h"
+#include "command_handlers.h"
 
 #include <stdio.h>
 
