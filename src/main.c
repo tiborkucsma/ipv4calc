@@ -17,7 +17,7 @@ const command_data_t command_data[] = {
     { 1, &command_handler_wildcard, "wildcard" },
     { 2, &command_handler_ipinfo,   "ipinfo" },
     { 0, &command_handler_help,     "help" },
-    { 0, NULL, 0 }
+    { 0, NULL, "" }
 };
 
 int main(int argc, char *argv[])

@@ -19,7 +19,7 @@ void process_args(arg_data_t *arg_data, int argc, char **argv)
             {
                 if (isalnum(argv[i][j]))
                 {
-                    arg_data->setopts[argv[i][j]] = 1;
+                    arg_data->setopts[(int) argv[i][j]] = 1;
                 }
             }
         } else if (arg_data->cmd == NULL)

@@ -9,6 +9,7 @@ workspace "ipv4calc"
 
     filter { "configurations:Debug" }
         symbols "On"
+        warnings "Extra"
 
     filter { "configurations:Release" }
         optimize "On"
