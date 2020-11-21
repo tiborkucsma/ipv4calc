@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    for (const command_data_t *cd = command_data; cd->name; cd++)
+    for (const command_data_t *cd = command_data; cd->name[0]; cd++)
     {
         if (strcmp(cd->name, parsed_argument_data.cmd) == 0)
         {
