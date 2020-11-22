@@ -10,8 +10,20 @@
 
 int command_handler_ipinfo(arg_data_t *pad)
 {
-    ipv4_addr_t in_addr = scan_ipv4_addr_str(pad->cmdargs[0]);
-    ipv4_mask_t in_mask = scan_ipv4_mask_str(pad->cmdargs[1]);
+    ipv4_addr_t in_addr;
+    ipv4_mask_t in_mask;
+
+    if (scan_ipv4_addr_str(pad->cmdargs[0], &in_addr) != 4)
+    {
+        printf("Hibas formatumban adta meg a cimet!\n");
+        return 1;
+    }
+
+    if (scan_ipv4_mask_str(pad->cmdargs[1], &in_mask) != 4)
+    {
+        printf("Hibas formatumban adta meg a maszkot!\n");
+        return 1;
+    }
 
     printf("A cim:   "); PRINT_IPV4_ADDR(in_addr, pad->setopts['b']) putchar('\n');
     printf("A maszk: "); PRINT_IPV4_MASK(in_mask, pad->setopts['b']) putchar('\n');

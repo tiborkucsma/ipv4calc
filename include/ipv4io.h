@@ -47,27 +47,27 @@ void print_ipv4_mask_dec(ipv4_mask_t mask);
 /**
  * @brief Beolvas egy ipv4-es cimet a felhasznalotol
  * 
- * @return Beolvasott cim
+ * @return 
  */
-ipv4_addr_t scan_ipv4_addr();
+int scan_ipv4_addr(ipv4_addr_t *addr);
 /**
  * @brief Beolvas egy ipv4-es maszkot a felhasznalotol
  * 
- * @return Beolvasott maszk
+ * @return 
  */
-ipv4_mask_t scan_ipv4_mask();
+int scan_ipv4_mask(ipv4_mask_t *mask);
 /**
  * @brief Beolvas egy ipv4-es cimet a egy stringbol
  * 
- * @return Beolvasott cim
+ * @return 
  */
-ipv4_addr_t scan_ipv4_addr_str(const char *str);
+int scan_ipv4_addr_str(const char *str, ipv4_addr_t *addr);
 /**
  * @brief Beolvas egy ipv4-es maszkot a egy stringbol
  * 
- * @return Beolvasott maszk
+ * @return 
  */
-ipv4_mask_t scan_ipv4_mask_str(const char *str);
+int scan_ipv4_mask_str(const char *str, ipv4_mask_t *mask);
 
 
 

@@ -10,7 +10,13 @@
 
 int command_handler_wildcard(arg_data_t *pad)
 {
-    ipv4_mask_t in_mask = scan_ipv4_mask_str(pad->cmdargs[0]);
+    ipv4_mask_t in_mask;
+    
+    if (scan_ipv4_mask_str(pad->cmdargs[0], &in_mask) != 4)
+    {
+        printf("Hibas formatumban adta meg a maszkot!\n");
+        return 1;
+    }
 
     printf("A maszk:  "); PRINT_IPV4_MASK(in_mask, pad->setopts['b']) putchar('\n');
 

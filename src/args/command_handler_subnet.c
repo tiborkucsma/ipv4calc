@@ -10,7 +10,13 @@
 
 int command_handler_subnet(arg_data_t *pad)
 {
-    ipv4_addr_t in_addr = scan_ipv4_addr_str(pad->cmdargs[0]);
+    ipv4_addr_t in_addr;
+    
+    if(scan_ipv4_addr_str(pad->cmdargs[0], &in_addr) != 4)
+    {
+        printf("Hibas formatumban adta meg a cimet!\n");
+        return 1;
+    }
 
     ipv4_class_t in_addr_class = ipv4_addr_class(in_addr);
 
