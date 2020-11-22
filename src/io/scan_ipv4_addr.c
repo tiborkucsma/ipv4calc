@@ -11,7 +11,7 @@ int scan_ipv4_addr(ipv4_addr_t *addr)
 {
     uint8_t a, b, c, d;
     int res = scanf("%hhu.%hhu.%hhu.%hhu", &a, &b, &c, &d);
-    *addr |= a << 24;
+    *addr = a << 24;
     *addr |= b << 16;
     *addr |= c << 8;
     *addr |= d << 0;
@@ -22,7 +22,7 @@ int scan_ipv4_addr_str(const char *str, ipv4_addr_t *addr)
 {
     uint8_t a, b, c, d;
     int res = sscanf(str, "%hhu.%hhu.%hhu.%hhu", &a, &b, &c, &d);
-    *addr |= a << 24;
+    *addr = a << 24;
     *addr |= b << 16;
     *addr |= c << 8;
     *addr |= d << 0;

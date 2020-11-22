@@ -25,6 +25,17 @@ uint8_t      ipv4_mask_octet(ipv4_mask_t mask, uint8_t n);
 
 
 /**
+ * @brief Megadja egy ip cimrol hogy privat-e
+ * 
+ * @param addr Az ip cim
+ * @return 1 ha privat, 0 kulonben
+ */
+int          ipv4_addr_private(ipv4_addr_t addr);
+
+
+
+
+/**
  * @brief Meghatarozza egy ip cim osztalyat
  * 
  * @param addr A cim

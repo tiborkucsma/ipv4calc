@@ -11,13 +11,13 @@
 #include "process_args.h"
 
 #include "command_handlers.h"
-typedef struct { int args; int (*handler)(arg_data_t *pad); const char name[128]; } command_data_t;
+typedef struct { int min_args; int max_args; int (*handler)(arg_data_t *pad); const char name[128]; } command_data_t;
 const command_data_t command_data[] = {
-    { 2, &command_handler_subnet,   "subnet" },
-    { 1, &command_handler_wildcard, "wildcard" },
-    { 2, &command_handler_ipinfo,   "ipinfo" },
-    { 0, &command_handler_help,     "help" },
-    { 0, NULL, "" }
+    { 2, 2, &command_handler_subnet,   "subnet" },
+    { 1, 1, &command_handler_wildcard, "wildcard" },
+    { 1, 2, &command_handler_ipinfo,   "ipinfo" },
+    { 0, 0, &command_handler_help,     "help" },
+    { 0, 0, NULL, "" }
 };
 
 int main(int argc, char *argv[])
@@ -36,9 +36,9 @@ int main(int argc, char *argv[])
     {
         if (strcmp(cd->name, parsed_argument_data.cmd) == 0)
         {
-            if (cd->args != parsed_argument_data.n_cmdargs)
+            if (cd->min_args > parsed_argument_data.n_cmdargs || cd->max_args < parsed_argument_data.n_cmdargs)
             {
-                printf("A(z) %s parancs %d parametert var.\n\n", parsed_argument_data.cmd, cd->args);
+                printf("A(z) %s parancs %d parametert var.\n\n", parsed_argument_data.cmd, cd->min_args);
                 command_handler_help(&parsed_argument_data);
                 return 1;
             }
