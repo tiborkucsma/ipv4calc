@@ -40,6 +40,12 @@ void print_ipv4_class_name(ipv4_class_t class)
     case ip4c_C:
         printf("C");
         break;
+    case ip4c_D:
+        printf("D (multicast cim)");
+        break;
+    case ip4c_E:
+        printf("E (kutatasi, kiserleti celra hasznalt cim)");
+        break;
     default:
         printf("Kulonleges celra fentartott cim.");
         break;

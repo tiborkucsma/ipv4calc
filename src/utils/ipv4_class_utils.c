@@ -10,6 +10,8 @@ ipv4_class_t ipv4_addr_class(ipv4_addr_t addr)
     if ((ipv4_addr_octet(addr, 0) >> 7) == 0 && ipv4_addr_octet(addr, 0) > 0) return ip4c_A;
     if ((ipv4_addr_octet(addr, 0) >> 6) == 2) return ip4c_B;
     if ((ipv4_addr_octet(addr, 0) >> 5) == 6) return ip4c_C;
+    if ((ipv4_addr_octet(addr, 0) >> 4) == 14) return ip4c_D;
+    if ((ipv4_addr_octet(addr, 0) >> 4) == 15) return ip4c_E;
     return ip4c_UD;
 }
 

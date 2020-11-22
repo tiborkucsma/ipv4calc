@@ -22,6 +22,15 @@ int command_handler_subnet(arg_data_t *pad)
 
     printf("A cim: "); PRINT_IPV4_ADDR(in_addr, pad->setopts['b']) putchar('\n');
 
+    if (in_addr_class == ip4c_D || in_addr_class == ip4c_E || in_addr_class == ip4c_UD)
+    {
+        printf("A cim osztalya: ");
+        print_ipv4_class_name(in_addr_class);
+        putchar('\n');
+        printf("Adjon meg A, B vagy C osztalyos cimet!\n");
+        return 1;
+    }
+
     uint32_t n_subnets;
     sscanf(pad->cmdargs[1], "%u", &n_subnets);
 
