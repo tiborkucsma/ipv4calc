@@ -1,5 +1,5 @@
 # ipv4calc
-Az SZTE Számítógép hálózatok 2020/I. kurzuson feladott szorgalmi feladat valamivel bővített változata.
+Az SZTE Számítógép hálózatok 2020/I. IB407g-19 kurzuson feladott szorgalmi feladat valamivel bővített változata. A programban 3 alparancs van: subnet, ipinfo, wildcard. A subnet parancs valósítja meg az eredeti szorgalmi feladatot, használata például: `ipv4calc subnet 197.14.26.11 5`. Részletes információk minden parancsról a program help menüjében érhetők el: `ipv4calc help`. Van egy 4. parancs ami nincs teljesen kész, a vlsm, ez elérhető a `feature/vlsm-feature` branchen.
 ## Build & futtatás
 ### Linux
 Első lépésként ajánlott a `source ./linux-setup-env.sh` futtatása, ez hozzáad két elérési utat a path-hez ami megkönnyíti az elkészített program futtatását. A `linux-build-gmake.sh` shell script futattása után legenerálódnak a buildeléshez szükséges Makefileok a `generated` mappába, majd automatikusan lefut a make is. Ezek után már használhatjuk is a programot.
