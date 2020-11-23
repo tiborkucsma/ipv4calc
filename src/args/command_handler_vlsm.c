@@ -30,6 +30,20 @@ int command_handler_vlsm(arg_data_t *pad)
         return 1;
     }
 
+    uint32_t needed_hosts = 0;
+    for (int i = 1; i < pad->n_cmdargs; i++)
+    {
+        uint32_t hosts = strtoul(pad->cmdargs[i], NULL, 10) + 2;
+        uint32_t j;
+        for (j = 1; j < hosts; j *= 2);
+        needed_hosts += j;
+    }
+    if (needed_hosts > pow_u32(2, 32 - ipv4_class_default_mask_bits(in_addr_class)))
+    {
+        printf("Tul sok hoszt cim szukseges, nem lehet igy felosztani!\n");
+        return 1;
+    }
+
     subnet_list_create_info_t subnet_info;
     subnet_info.st_addr = in_addr;
     subnet_info.st_mask = ipv4_mask_generate(ipv4_class_default_mask_bits(in_addr_class));
