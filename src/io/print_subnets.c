@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 
-void print_subnets(ipv4_addr_t addr, ipv4_mask_t subn_mask, uint8_t n_subnets, int binary_out)
+void print_subnets(ipv4_addr_t addr, ipv4_mask_t subn_mask, uint32_t n_subnets, int binary_out)
 {
     uint8_t orig_mask_bits = ipv4_class_default_mask_bits(ipv4_addr_class(addr));
     ipv4_mask_t orig_mask = ipv4_mask_generate(orig_mask_bits);
@@ -16,7 +16,7 @@ void print_subnets(ipv4_addr_t addr, ipv4_mask_t subn_mask, uint8_t n_subnets, i
 
     addr = addr & orig_mask;
 
-    for (uint8_t i = 0; i < n_subnets; i++)
+    for (uint32_t i = 0; i < n_subnets; i++)
     {
         ipv4_addr_t subnet_addr;
         subnet_addr = addr | (i << (32 - subn_mask_bits));

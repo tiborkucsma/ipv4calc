@@ -99,4 +99,4 @@ void print_ipv4_class_name(ipv4_class_t class);
  * @param n_subnets A kiirando alhalozatok szama
  * @param binary_out Binaris legyen-e a kimenet
  */
-void print_subnets(ipv4_addr_t addr, ipv4_mask_t subn_mask, uint8_t n_subnets, int binary_out);
+void print_subnets(ipv4_addr_t addr, ipv4_mask_t subn_mask, uint32_t n_subnets, int binary_out);
