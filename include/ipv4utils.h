@@ -51,7 +51,7 @@ ipv4_class_t ipv4_addr_class(ipv4_addr_t addr);
  * 
  * @return Egyes bitek szama
  */
-uint8_t     ipv4_class_default_mask_bits(ipv4_class_t class);
+uint8_t      ipv4_class_default_mask_bits(ipv4_class_t class);
 
 
 
@@ -69,4 +69,10 @@ ipv4_mask_t  ipv4_mask_generate(uint8_t n);
  * @param mask A maszk
  * @return Az egyes bitek szama
  */
-uint8_t     ipv4_mask_bits(ipv4_mask_t mask);
+uint8_t      ipv4_mask_bits(ipv4_mask_t mask);
+
+
+
+
+int          ipv4_subnet(subnet_list_t *sl, subnet_list_create_info_t *create_info);
+void         ipv4_destroy_subnet_list(subnet_list_t *sl);

@@ -13,10 +13,11 @@
 #include "command_handlers.h"
 typedef struct { int min_args; int max_args; int (*handler)(arg_data_t *pad); const char name[128]; } command_data_t;
 const command_data_t command_data[] = {
-    { 2, 2, &command_handler_subnet,   "subnet" },
-    { 1, 1, &command_handler_wildcard, "wildcard" },
-    { 1, 2, &command_handler_ipinfo,   "ipinfo" },
-    { 0, 0, &command_handler_help,     "help" },
+    { 2, 2,  &command_handler_subnet,   "subnet" },
+    { 2, 16, &command_handler_vlsm,     "vlsm" },
+    { 1, 1,  &command_handler_wildcard, "wildcard" },
+    { 1, 2,  &command_handler_ipinfo,   "ipinfo" },
+    { 0, 0,  &command_handler_help,     "help" },
     { 0, 0, NULL, "" }
 };
 

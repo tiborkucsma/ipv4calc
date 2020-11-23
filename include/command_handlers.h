@@ -29,6 +29,15 @@ int command_handler_subnet(arg_data_t *pad);
 
 
 /**
+ * @brief 
+ * 
+ * @param pad 
+ * @return int 
+ */
+int command_handler_vlsm(arg_data_t *pad);
+
+
+/**
  * @brief A wildcard parancshoz tartozo parancs kezelo, atalakit egy normal maszkot wildcard maszkra
  * 
  * @param pad A program argumentum adatai

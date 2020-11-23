@@ -9,7 +9,7 @@
 #include "ipv4math.h"
 #include "process_args.h"
 
-int command_handler_subnet(arg_data_t *pad)
+int command_handler_vlsm(arg_data_t *pad)
 {
     ipv4_addr_t in_addr;
     
@@ -33,29 +33,30 @@ int command_handler_subnet(arg_data_t *pad)
     subnet_list_create_info_t subnet_info;
     subnet_info.st_addr = in_addr;
     subnet_info.st_mask = ipv4_mask_generate(ipv4_class_default_mask_bits(in_addr_class));
-    subnet_info.n_subnets = strtoul(pad->cmdargs[1], NULL, 10);
-    subnet_info.n_hosts = 0;
-    subnet_info.n_subnets_to_include = subnet_info.n_subnets;
-
-    subnet_list_t subnet_list;
-    int res = ipv4_subnet(&subnet_list, &subnet_info);
-    if (res > 0)
+    subnet_info.n_subnets = 0;
+    subnet_info.n_subnets_to_include = 1;
+    for (int i = 1; i < pad->n_cmdargs; i++)
     {
-        if (res > 1) printf("A legnagyobb ervenyes maszk /30-as, a megadott /%d!\n", res);
-        return 1;
+        subnet_info.n_hosts = strtoul(pad->cmdargs[i], NULL, 10);
+        
+        subnet_list_t subnet_list;
+        int res = ipv4_subnet(&subnet_list, &subnet_info);
+        if (res > 0)
+        {
+            if (res > 1) printf("A legnagyobb ervenyes maszk /30-as, a megadott /%d!\n", res);
+            return 1;
+        }
+
+        printf("%u. alhalozat:\n", i);
+        printf("Maszk:\t\t\t");
+        PRINT_IPV4_MASK(subnet_list.data[0].mask, pad->setopts['b']) putchar('\n');
+        print_subnet(subnet_list.data[0], pad->setopts['b']);
+
+        subnet_info.st_mask = subnet_list.data[0].mask;
+        subnet_info.st_addr = (subnet_list.data[0].addr | ~subnet_info.st_mask) + 1;
+
+        ipv4_destroy_subnet_list(&subnet_list);
     }
-
-    PRINT_IPV4_MASK(subnet_list.data[0].mask, pad->setopts['b']) putchar('\n');
-    for (uint32_t i = 0; i < subnet_list.n_sn; i++)
-    {
-        printf("%u. alhalozat:\n", i + 1);
-        print_subnet(subnet_list.data[i], pad->setopts['b']);
-    }
-
-    subnet_info.st_mask = subnet_list.data[0].mask;
-    subnet_info.st_addr = (subnet_list.data[0].addr | ~subnet_info.st_mask) + 1;
-
-    ipv4_destroy_subnet_list(&subnet_list);
-
+    
     return 0;
 }

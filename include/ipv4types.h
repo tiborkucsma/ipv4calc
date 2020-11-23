@@ -14,6 +14,27 @@ typedef uint32_t ipv4_addr_t;
  */
 typedef uint32_t ipv4_mask_t;
 
+typedef struct
+{
+    ipv4_addr_t addr;
+    ipv4_mask_t mask;
+} subnet_t;
+
+typedef struct
+{
+    subnet_t *data;
+    uint32_t n_sn;
+} subnet_list_t;
+
+typedef struct
+{
+    ipv4_addr_t st_addr;
+    ipv4_mask_t st_mask;
+    uint32_t n_subnets;
+    uint32_t n_hosts;
+    uint32_t n_subnets_to_include;
+} subnet_list_create_info_t;
+
 /**
  * @brief IPv4 osztaly tipus (D es E osztaly nem kezelt)
  * 
