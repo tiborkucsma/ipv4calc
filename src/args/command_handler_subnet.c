@@ -14,20 +14,20 @@ int command_handler_subnet(arg_data_t *pad)
     
     if(scan_ipv4_addr_str(pad->cmdargs[0], &in_addr) != 4)
     {
-        printf("Hibas formatumban adta meg a cimet!\n");
+        printf("Wrong address format!\n");
         return 1;
     }
 
     ipv4_class_t in_addr_class = ipv4_addr_class(in_addr);
 
-    printf("A cim: "); PRINT_IPV4_ADDR(in_addr, pad->setopts['b']) putchar('\n');
+    printf("The address: "); PRINT_IPV4_ADDR(in_addr, pad->setopts['b']) putchar('\n');
 
     if (in_addr_class == ip4c_D || in_addr_class == ip4c_E || in_addr_class == ip4c_UD)
     {
-        printf("A cim osztalya: ");
+        printf("The class of the address: ");
         print_ipv4_class_name(in_addr_class);
         putchar('\n');
-        printf("Adjon meg A, B vagy C osztalyos cimet!\n");
+        printf("Supply a class A, B or C address!\n");
         return 1;
     }
 
@@ -39,14 +39,14 @@ int command_handler_subnet(arg_data_t *pad)
     uint8_t subn_addr_mask_bits = ipv4_class_default_mask_bits(in_addr_class) + n_bits_to_convert;
     if (subn_addr_mask_bits > 30)
     {
-        printf("Hibas adatok! A legnagyobb ervenyes maszk /30-as, a megadott /%d!\n", subn_addr_mask_bits);
+        printf("The biggesst valid mask is /30, the mask given: /%d!\n", subn_addr_mask_bits);
         return 1;
     }
 
-    printf("%u alhalozatra kell bontani (%u bit atalakitasaval).\n", pow_u32(2, n_bits_to_convert), n_bits_to_convert);
+    printf("Dividing into %u subnets (changing %u bits).\n", pow_u32(2, n_bits_to_convert), n_bits_to_convert);
     
     ipv4_mask_t subn_addr_mask = ipv4_mask_generate(subn_addr_mask_bits);
-    printf("Az uj maszk: ");
+    printf("The new mask: ");
     PRINT_IPV4_MASK(subn_addr_mask, pad->setopts['b'])
     putchar('\n');
     putchar('\n');

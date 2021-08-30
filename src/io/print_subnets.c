@@ -20,12 +20,12 @@ void print_subnets(ipv4_addr_t addr, ipv4_mask_t subn_mask, uint32_t n_subnets, 
     {
         ipv4_addr_t subnet_addr;
         subnet_addr = addr | (i << (32 - subn_mask_bits));
-        printf("%u. alhalozat:\n", i + 1);
-        printf("Alhalozat cime:            "); PRINT_IPV4_ADDR(subnet_addr,                    binary_out); putchar('\n');
-        printf("Elso kioszthato cim:       "); PRINT_IPV4_ADDR(subnet_addr + 1,                binary_out); putchar('\n');
-        printf("Utolso kioszthato cim:     "); PRINT_IPV4_ADDR((subnet_addr | ~subn_mask) - 1, binary_out); putchar('\n');
-        printf("Broadcast cim:             "); PRINT_IPV4_ADDR(subnet_addr | ~subn_mask,       binary_out); putchar('\n');
-        printf("Lehetseges eszkozok szama: %d", (subnet_addr | ~subn_mask) - (subnet_addr + 1));            putchar('\n');
+        printf("%u. subnet:\n", i + 1);
+        printf("Subnet address:    "); PRINT_IPV4_ADDR(subnet_addr,                    binary_out); putchar('\n');
+        printf("First host:        "); PRINT_IPV4_ADDR(subnet_addr + 1,                binary_out); putchar('\n');
+        printf("Last host:         "); PRINT_IPV4_ADDR((subnet_addr | ~subn_mask) - 1, binary_out); putchar('\n');
+        printf("Broadcast address: "); PRINT_IPV4_ADDR(subnet_addr | ~subn_mask,       binary_out); putchar('\n');
+        printf("Max hosts:         %d", (subnet_addr | ~subn_mask) - (subnet_addr + 1));            putchar('\n');
         putchar('\n');
     }
 }

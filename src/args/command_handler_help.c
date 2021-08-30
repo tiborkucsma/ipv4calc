@@ -3,19 +3,16 @@
 #include <stdio.h>
 
 #define USAGE_STR \
-    "Hasznalat: ipv4calc [-b] <parancs> [<argumentumok>]\n" \
+    "Hasznalat: ipv4calc [-b] <command> [<args>]\n" \
     "\n" \
-    "Parancsok:\n" \
-    " subnet <cim> <n>      N darab alhalozatra bont egy halozatot\n" \
-    " wildcard <maszk>      Kiszamolja egy maszk wildcard maszkjat\n" \
-    " ipinfo <cim> <maszk>  Kiirja a megadott cim osztalyat, alapertelmezett\n" \
-    "                       maszkjat, azt, hogy ez milyen cim a megadott maszk\n" \
-    "                       alapjan, valamint ha ez nem egy alhalozat cime,\n" \
-    "                       akkor az alhalozat cimet is amelyhez tartozik.\n" \
-    " help                  Kiirja ezt a menut\n" \
+    "Commands:\n" \
+    " subnet <addr> <n>     Divides a network to N subnets\n" \
+    " wildcard <mask>       Calculates the wildcard mask of the given mask\n" \
+    " ipinfo <addr> <mask>  Prints out detailed information on the given ip address and mask\n" \
+    " help                  Prints out this menu\n" \
     "\n" \
-    "Opciok:\n" \
-    " [-b]                  Minden cimet es maszkot binarisan ir ki a program.\n" \
+    "Options:\n" \
+    " [-b]                  Prints out all ip addresses and masks in binary format\n" \
     "\n"
 
 int command_handler_help(arg_data_t *pad)
